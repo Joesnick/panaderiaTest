@@ -9,7 +9,7 @@ const addStock = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 // getComments Func
 const getStock = async (req, res) => {
@@ -20,7 +20,7 @@ const getStock = async (req, res) => {
         console.error(error);
         res.status(500).send('Error getting Stock..');
     }
-}
+};
 
 // deleteComment Func
 const deleteStock = async (req, res) => {
@@ -39,6 +39,4 @@ const deleteStock = async (req, res) => {
     }
 };
 
-export { addStock }
-export { getStock }
-export { deleteStock }
+export { addStock, getStock, deleteStock };

@@ -24,4 +24,4 @@ const stockSchema = mongoose.Schema({
 
 const Stock = mongoose.model("Stock", stockSchema);
 
-export default Stock
+export default Stock;

@@ -9,7 +9,7 @@ const addComment = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 // getComments Func
 const getComments = async (req, res) => {
@@ -20,7 +20,7 @@ const getComments = async (req, res) => {
         console.error(error);
         res.status(500).send('Error getting users..');
     }
-}
+};
 
 // deleteComment Func
 const deleteComment = async (req, res) => {
@@ -39,6 +39,4 @@ const deleteComment = async (req, res) => {
     }
 };
 
-export { addComment }
-export { getComments }
-export { deleteComment }
+export { addComment, getComments, deleteComment };

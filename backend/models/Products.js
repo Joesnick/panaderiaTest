@@ -33,4 +33,4 @@ const productsSchema = mongoose.Schema({
 }
 );
 
-export default Products
+export default Products;

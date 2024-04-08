@@ -1,3 +1,4 @@
 node install express
 node install nodemon 
 node install mongoose
+npm i jsonwebtoken
