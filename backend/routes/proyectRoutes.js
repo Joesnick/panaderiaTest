@@ -1,14 +1,14 @@
 import express from "express";
 
 import {
-    obtenerProyects,
+    getProyects,
     newProyect,
-    obtenerProyect,
+    getProyect,
     editProyect,
     deleteProyect,
     addColaborator,
     deleteColaborator,
-    obtenerTareas
+    getTasks
 } from '../controllers/proyectController.js';
 import checkAuth from '../middleware/checkAuth.js';
 
@@ -16,16 +16,16 @@ const router = express.Router();
 
 router
     .route("/")
-    .get(checkAuth, obtenerProyects)
+    .get(checkAuth, getProyects)
     .post(checkAuth, newProyect);
     
 router
     .route('/:id')
-    .get(checkAuth, obtenerProyect)
+    .get(checkAuth, getProyect)
     .put(checkAuth, editProyect)
     .delete(checkAuth, deleteProyect);
 
-router.get('/tareas/:id', checkAuth, obtenerTareas);
+router.get('/tarea/:id', checkAuth, getTasks);
 router.post('/agregar-colaborador/:id', checkAuth, addColaborator);
 router.delete('/eliminar-colaborador/:id', checkAuth, deleteColaborator);
 
