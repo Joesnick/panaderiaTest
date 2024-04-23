@@ -1,3 +1,4 @@
+import { Decimal128, Double } from "mongodb";
 import mongoose from "mongoose";
 
 const productsSchema = mongoose.Schema({
@@ -17,7 +18,7 @@ const productsSchema = mongoose.Schema({
         trim: true
     },
     price: {
-        type: Double, 
+        type: Decimal128, 
         required: true,
         trim: true
     },
@@ -32,5 +33,7 @@ const productsSchema = mongoose.Schema({
     }
 }
 );
+
+const Products = mongoose.model("Products", productsSchema);
 
 export default Products;

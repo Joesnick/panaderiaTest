@@ -40,7 +40,7 @@ const Navbar = () => {
               <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="/">
                 INICIO
               </a>
-              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="#nosotros">
+              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="/#nosotros">
                 NOSOTROS
               </a>
               <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="#productos">
