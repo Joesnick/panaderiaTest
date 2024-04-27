@@ -11,11 +11,11 @@ const Contactanos = () => {
             <div className="columns is-vcentered ml-6">
                 <div className="column is-6">
                     <div className="box" style={{ margin: '0 20px' }}>
-                        <h2 className="title is-2 has-text-centered">Contáctenos</h2>
+                        <h2 className="title is-2 has-text-centered has-text-black">Contáctenos</h2>
                         <form>
                             <div className="field is-horizontal">
                                 <div className="field-label">
-                                    <label className="label is-size-5">
+                                    <label className="label is-size-5 has-text-black">
                                         Nombre <span className="required">*</span>
                                     </label>
                                 </div>
@@ -30,7 +30,7 @@ const Contactanos = () => {
 
                             <div className="field is-horizontal">
                                 <div className="field-label">
-                                    <label className="label is-size-5">
+                                    <label className="label is-size-5 has-text-black">
                                         Mail <span className="required">*</span>
                                     </label>
                                 </div>
@@ -45,7 +45,7 @@ const Contactanos = () => {
 
                             <div className="field is-horizontal">
                                 <div className="field-label">
-                                    <label className="label is-size-5">Mensaje</label>
+                                    <label className="label is-size-5 has-text-black">Mensaje</label>
                                 </div>
                                 <div className="field-body">
                                     <div className="field">

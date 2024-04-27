@@ -11,11 +11,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation" style={{ 'backgroundColor': '#8a7a70' }}>
+    <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          <img src={iconoPan} width="55" height="28" className="navbar-logo is-inline" style={{ marginRight: '10px' }} />
-          <span className="has-text-weight-semibold has-text-white has-text-weight-bold is-size-3">PANADERIA</span>
+          <img src={iconoPan} width="75px" height="72" className="navbar-logo" />
+          <span className="has-text-weight-semibold has-text-white has-text-weight-bold is-size-4">PANADERIA</span>
         </a>
         <a
           role="button"
@@ -37,19 +37,22 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="/">
+              <a className="navbar-item has-text-white has-text-weight-semibold is-size-6" href="/">
                 INICIO
               </a>
-              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="/#nosotros">
+              <a className="navbar-item has-text-white has-text-weight-semibold is-size-6" href="/#nosotros">
                 NOSOTROS
               </a>
-              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="#productos">
+              <a className="navbar-item has-text-white has-text-weight-semibold is-size-6" href="/#productos">
                 PRODUCTOS
               </a>
-              <a className="navbar-item has-text-white has-text-weight-semibold is-size-5" href="#contactanos">
+              <a className="navbar-item has-text-white has-text-weight-semibold is-size-6" href="/#contactanos">
                 CONTACTENOS
               </a>
-              <a className="button is-success has-text-weight-bold is-size-5 is-rounded" href="/login" style={{ 'background-color': '#F88502' }}>
+              <a className="button is-success has-text-weight-bold is-size-6 is-rounded" href="/login" style={{ 'background-color': '#F88502' }}>
+                REGISTRARSE
+              </a>
+              <a className="button is-success has-text-weight-bold is-size-6 is-rounded" href="/login" style={{ 'background-color': '#F88502' }}>
                 INICIAR SESION
               </a>
             </div>

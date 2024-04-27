@@ -8,7 +8,7 @@ const Footer = () => {
     return (
 
         <footer className="footer">
-            <div className="container" style={{ marginBottom: '20px' }}>
+            <div className="footer-container" style={{ marginBottom: '20px' }}>
                 <div className="columns">
                     <div className="column">
                         <div className="opening-hours">

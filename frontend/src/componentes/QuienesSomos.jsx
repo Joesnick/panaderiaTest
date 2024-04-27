@@ -11,7 +11,9 @@ const QuienesSomos = () => {
         <div className="columns is-multiline is-vcentered is-centered ml-6">
           <div className="column is-5-desktop is-centered">
             <p className="is-size-3 has-text-left has-text-black" style={{ lineHeight: "2" }}>
-            Somos una panadería apasionada por el arte de la panificación. Nuestro compromiso es ofrecer productos frescos y deliciosos que se hornean con amor y cuidado. Descubre el sabor auténtico en cada bocado y únete a nuestra familia panadera.
+            Somos una panadería apasionada por el arte de la panificación. 
+            Nuestro compromiso es ofrecer productos frescos y deliciosos que se hornean con amor y cuidado. 
+            Descubre el sabor auténtico en cada bocado y únete a nuestra familia panadera.
             </p>
           </div>
           <div className="column is-5-desktop">
