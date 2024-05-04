@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import conectarDB from "./config/db.js"
 import usersRoutes from './routes/usersRoutes.js';
 import stockRoutes from './routes/stockRoutes.js';
@@ -18,6 +19,23 @@ conectarDB();
 // app.get('/', (req, res) => {
 //   res.send("Testing..");
 // })
+
+// Configurar CORS
+const whitelist = ['http://localhost:5173'];
+
+const corsOption = {
+    origin: function(origin, callback){
+        if(whitelist.includes(origin)){
+            // puede consultar la API
+            callback(null, true);
+        }else{
+            // No esta permitido
+            callback(new Error("Error de Cors"));
+        }
+    },
+};
+
+app.use(cors(corsOption));
 
 app.use("/api/users", usersRoutes);
 app.use("/api/stock", stockRoutes);

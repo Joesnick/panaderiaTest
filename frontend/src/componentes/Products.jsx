@@ -21,7 +21,7 @@ const Products = ({ product }) => {
             <div className="content is-size-5">
               {product.descripcion}
               <br />
-              <button className="button has-text-white has-text-weight-bold" style={{'background-color': '#F88502'}}>Comprar</button>
+              <button className="button has-text-white has-text-weight-bold" style={{ 'background-color': '#F88502' }}>Comprar</button>
             </div>
           </div>
         </div>

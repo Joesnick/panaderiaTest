@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './componentes/Footer'
 
 
+
 function App() {
   return (
     <>
@@ -22,7 +23,7 @@ function App() {
               <Inicio />
               <QuienesSomos />
               <section className="productos" id='productos'>
-                <h2 className="title title-font is-size-2 has-text-white p-3 mt-4" style={{ 'background-color': '#8a7a70' }}>Nuestros productos</h2>
+                <h2 className="title title-font is-size-2 has-text-white p-3 mt-4" style={{ backgroundColor: '#8a7a70' }}>Nuestros productos</h2>
                 <div className="columns is-multiline">
                   {productsInfo.map((product) => (
                     <div className="column is-3-desktop" key={product.id}>

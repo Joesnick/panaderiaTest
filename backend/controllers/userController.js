@@ -10,9 +10,9 @@ const register = async (req, res) => {
     const { email } = req.body;
     const existeUser = await User.findOne({ email });
 
-    if (existeUser){
+    if (existeUser) {
         const error = new Error("Usuario ya registrado");
-        return res.status(400).json({ msg: error.message})
+        return res.status(400).json({ msg: error.message })
     }
 
 
@@ -30,8 +30,8 @@ const register = async (req, res) => {
 // getUsers Async Function
 const getUsers = async (req, res) => {
     try {
-        const users = await User.find(); 
-        res.json(users); 
+        const users = await User.find();
+        res.json(users);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error getting users..');
@@ -47,7 +47,7 @@ const deleteUser = async (req, res) => {
         if (!deletedUser) {
             return res.status(404).send('User Not Found!');
         }
-        res.json(deletedUser); 
+        res.json(deletedUser);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error Trying to Remove User');
@@ -55,21 +55,21 @@ const deleteUser = async (req, res) => {
 };
 
 const autenticar = async (req, res) => {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
 
     // Comprobar si el Usuario existe
     const user = await User.findOne({ email });
-    if (!user){
+    if (!user) {
         const error = new Error("El Usuario no existe");
         return res.status(404).json({ msg: error.message });
     }
     // Comprobar si el Usuario está confirmado
-    if (!user.confirmated){
+    if (!user.confirmated) {
         const error = new Error("Tu cuenta no ha sido confirmada");
         return res.status(403).json({ msg: error.message });
     }
     // Comprobar el password
-    if (await user.comprobarPassword(password)){
+    if (await user.comprobarPassword(password)) {
         res.json({
             _id: user._id,
             name: user.name,
@@ -77,7 +77,7 @@ const autenticar = async (req, res) => {
             token: generarJWT(user._id),
 
         });
-    }else{
+    } else {
         const error = new Error("Contraseña incorrecta");
         return res.status(402).json({ msg: error.message });
     }
@@ -86,17 +86,17 @@ const autenticar = async (req, res) => {
 const confirmar = async (req, res) => {
     const { token } = req.params;
     const userConfirmar = await User.findOne({ token });
-    if(!userConfirmar){
+    if (!userConfirmar) {
         const error = new Error("Token no válido");
         return res.status(402).json({ msg: error.message });
     }
-    try{
+    try {
         userConfirmar.confirmated = true;
         userConfirmar.token = "";
         await userConfirmar.save();
         res.json({ msg: "Usuario confirmado correctamente" });
 
-    } catch (error){
+    } catch (error) {
         console.log(error);
     }
 };
@@ -104,7 +104,7 @@ const confirmar = async (req, res) => {
 const olvidePassword = async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
-    if (!user){
+    if (!user) {
         const error = new Error("Usuario no válido o no existe");
         return res.status(402).json({ msg: error.message });
     }
@@ -117,13 +117,13 @@ const olvidePassword = async (req, res) => {
     }
 };
 
-const comprobarToken = async (req, res) =>{
+const comprobarToken = async (req, res) => {
     const { token } = req.params;
 
     const tokenValido = await User.findOne({ token });
-    if (tokenValido){
-        res.json({ msg: "Token válido y el usuario existe"});
-    }else{
+    if (tokenValido) {
+        res.json({ msg: "Token válido y el usuario existe" });
+    } else {
         const error = new Error("El token no es válido");
         return res.status(402).json({ msg: error.message });
     }
@@ -135,17 +135,17 @@ const nuevoPassword = async (req, res) => {
     const { password } = req.body;
 
     const user = await User.findOne({ token });
-    if (user){
+    if (user) {
         user.password = password;
         user.token = "";
 
         try {
             await user.save();
-            res.json({ msg: "Contraseña modificada correctamente"});
+            res.json({ msg: "Contraseña modificada correctamente" });
         } catch (error) {
             console.log(error);
         }
-    } else{
+    } else {
         const error = new Error("El token no es válido");
         return res.status(402).json({ msg: error.message });
     }

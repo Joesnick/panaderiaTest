@@ -32,7 +32,7 @@ const Weather = () => {
                     } else {
                         console.error('Error getting the temperature');
                     }
-                    
+
                 } else {
                     console.error('Error requesting location');
                 }

@@ -12,7 +12,7 @@ const Inicio = () => {
                 <h1 className='title title-font is-size-1 has-text-white has-text-weight-bold'>¡El sabor de la tradición!</h1>
                 <p className='is-size-4 has-text-white has-text-weight-semibold'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae nemo nulla magnam? Possimus quibusdam, eveniet quia officiis accusamus voluptas necessitatibus quidem eos rerum non dolores? Ducimus reprehenderit cupiditate accusamus eos!</p>
             </div>
-        </div> 
+        </div>
     );
 };
 
