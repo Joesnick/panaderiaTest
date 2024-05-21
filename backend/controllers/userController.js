@@ -14,14 +14,11 @@ const register = async (req, res) => {
         const error = new Error("Usuario ya registrado");
         return res.status(400).json({ msg: error.message })
     }
-
-
-
     try {
         const user = new User(req.body);
         user.token = generarId();
-        const savedUser = await user.save();
-        res.json(savedUser);
+        await user.save();
+        res.json({msg: 'Usuario creado correctamente, revisa tu Email para confirmar tu cuenta'});
     } catch (error) {
         console.log(error);
     }
@@ -85,19 +82,27 @@ const autenticar = async (req, res) => {
 
 const confirmar = async (req, res) => {
     const { token } = req.params;
-    const userConfirmar = await User.findOne({ token });
-    if (!userConfirmar) {
-        const error = new Error("Token no válido");
-        return res.status(402).json({ msg: error.message });
-    }
+  
     try {
-        userConfirmar.confirmated = true;
-        userConfirmar.token = "";
-        await userConfirmar.save();
-        res.json({ msg: "Usuario confirmado correctamente" });
+      const user = await User.findOne({ token });
+  
+      if (!user) {
+        const error = new Error('Token no válido');
+        return res.status(404).json({ msg: error.message });
+      }
+  
+      if (user.confirmated) {
+        return res.status(400).json({ msg: 'Usuario ya confirmado' });
+      }
 
+      user.confirmated = true;
+      user.token = '';
+      await user.save();
+
+      return res.status(200).json({ msg: 'Usuario confirmado correctamente' });
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      return res.status(500).json({ msg: 'Hubo un error' });
     }
 };
 

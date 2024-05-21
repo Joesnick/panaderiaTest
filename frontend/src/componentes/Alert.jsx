@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 const Alert = ({ alert }) => {
   return (
-    <div className={`notification ${alert.error ? 'is-danger' : 'is-info'} mt-1`}>
-      {alert.msg}
+    <div className={`notification ${alert.error ? 'is-danger is-size-5' : 'is-success is-size-5'} mt-1`}>
+      <span className="has-text-weight-bold">{alert.msg}</span>
     </div>
   );
 };

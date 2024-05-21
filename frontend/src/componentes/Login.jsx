@@ -4,6 +4,7 @@ import panRegister from '../assets/img/pancito.png';
 import panLogin from '../assets/img/pancito2.png';
 import axios from 'axios';
 import Alert from './Alert.jsx';
+import { Link } from 'react-router-dom';
 
 
 import { useState } from 'react';
@@ -18,97 +19,107 @@ const Login = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [alert, setAlert] = useState({})
 
-    /*   const [formData, setFormData] = useState({
-           name: '',
-           username: '',
-           email: '',
-           password: '',
-           confirmPassword: ''
-       });
-       const [passwordMatchError, setPasswordMatchError] = useState(false);
-       name, 
-   */
+
     const toggleForm = () => {
         setIsSignUp(!isSignUp);
     };
 
-    /*    const handleChange = (e) => {
-            const { name, value } = e.target;
-            setFormData({
-                ...formData,
-                [name]: value
-            });
-    
-             //Validar que las contraseñas coincidan en tiempo real
-            if (name === 'confirmPassword') {
-                setPasswordMatchError(value !== formData.password);
-            } else if (name === 'password') {
-                setPasswordMatchError(value !== formData.confirmPassword);
-            }
-        }; */
+
 
     const handleSubmit = async e => {
         e.preventDefault();
-        // Validar que las contraseñas coincidan antes de enviar el formulario
-        /* if (formData.password !== formData.confirmPassword) {
-            setPasswordMatchError(true);
-            return;
-        }*/
 
         //Registrar
+        if (isSignUp) {
 
-        if ([name, email, password, confirmPassword].includes('')) {
-            setAlert({
-                msg: 'Todos los campos son obligatorios',
-                error: true
-            })
-            return
+            if ([name, email, password, confirmPassword].includes('')) {
+                setAlert({
+                    msg: 'Todos los campos son obligatorios',
+                    error: true
+                })
+                return
+            }
+
+            if (password !== confirmPassword) {
+                setAlert({
+                    msg: 'Los password no son iguales',
+                    error: true
+                })
+                return
+            }
+
+            if (password.length < 6) {
+                setAlert({
+                    msg: 'El Password es muy corto, mínimo 6 caracteres',
+                    error: true
+                })
+                return
+            }
+
+            setAlert({})
+
+            try {
+
+                const { data } = await axios.post('http://localhost:8081/api/users', {
+                    name,
+                    username,
+                    email,
+                    password
+                })
+
+                setAlert({
+                    msg: data.msg,
+                    error: false
+                })
+
+                setTimeout(() => {
+                    setAlert({});
+                    window.location.reload();
+                }, 3000);
+
+            } catch (error) {
+                setAlert({
+                    msg: error.response.data.msg,
+                    error: true
+                })
+            }
+        } else {
+            // Iniciar Sesión
+            if ([email, password].includes('')) {
+                setAlert({
+                    msg: 'Todos los campos son obligatorios',
+                    error: true
+                });
+                return;
+            }
+
+            setAlert({});
+
+            try {
+                const { data } = await axios.post('http://localhost:8081/api/users/login', { email, password });
+
+                setAlert({
+                    msg: 'Inicio de sesión exitoso',
+                    error: false
+                });
+
+                // Almacenar el token en el localStorage
+                localStorage.setItem('token', data.token);
+
+                setTimeout(() => {
+                    setAlert({});
+                    // Redirigir al usuario a otra página
+                    window.location.href = '/';
+                }, 2000);
+
+            } catch (error) {
+                setAlert({
+                    msg: error.response.data.msg,
+                    error: true
+                });
+            }
         }
-
-        if (password !== confirmPassword) {
-            setAlert({
-                msg: 'Los password no son iguales',
-                error: true
-            })
-            return
-        }
-
-        if (password.lenght < 6) {
-            setAlert({
-                msg: 'El Password es muy corto, mínimo 6 caracteres',
-                error: true
-            })
-            return
-        }
-
-        setAlert({})
-
-        try {
-
-            const { data } = await axios.post('http://localhost:8081/api/users', { 
-                name, 
-                username, 
-                email, 
-                password 
-            })
-
-            setAlert({
-                msg: data.msg,
-                error: false
-            })
-
-            setTimeout(() => {
-                setAlert({});
-                window.location.reload();
-            }, 2000);
-
-        } catch (error) {
-            setAlert({
-                msg: error.response.data.msg,
-                error: true
-            })
-        }
-    }
+    };
 
     const { msg } = alert
 
@@ -133,13 +144,14 @@ const Login = () => {
                                 </form>
                             </div>
                             <div className="form-container sign-in">
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <h1 className="title is-size-2 has-text-bold has-text-black">Iniciar sesión</h1>
                                     <img src={panLogin} alt="Pan-Login" />
-                                    <input type="email" placeholder="Correo electrónico" />
-                                    <input type="password" placeholder="Contraseña" />
-                                    <a href="#" className="has-text-bold">¿Olvidaste tu contraseña?</a>
-                                    <button style={{ backgroundColor: '#F88502' }} className=" has-text-white">Ingresar</button>
+                                    {msg && <Alert alert={alert} />}
+                                    <input type="email" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <Link to="/olvide-password" className="has-text-weight-bold">¿Olvidaste tu contraseña?</Link>
+                                    <button type="submit" style={{ backgroundColor: '#F88502' }} className=" has-text-white">Ingresar</button>
                                 </form>
                             </div>
                             <div className="toggle-container">
